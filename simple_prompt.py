@@ -19,8 +19,9 @@ def ask_model(input):
     ]
   )
   try:
-    response = result["choices"][0]["message"]["content"]
-  except:
+    response = result.choices[0].message.content
+  except Exception as e:
+    print(e)
     return "Something went wrong. Please try again."
   return response
 
