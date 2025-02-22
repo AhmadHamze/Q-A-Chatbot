@@ -1,3 +1,22 @@
 # Q&A Chatbot
 
 This is a dummy project to learn how to create a chatbot using Python, LLMs, and related technologies.
+
+## Usage
+
+First, create a Python virtual environment:
+
+```bash
+python3.12 -m venv env
+```
+Make sure it it activated:
+
+```bash
+source env/bin/activate
+```
+
+Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
