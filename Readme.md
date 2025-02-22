@@ -20,3 +20,9 @@ Install the required packages:
 ```bash
 pip install -r requirements.txt
 ```
+
+Ater the installation is complete, create a file named `project_secret.py`, inside it you have to store your API key like this:
+
+```python
+API_KEY = "YOUR_API_KEY"
+```
