@@ -7,7 +7,6 @@ client = OpenAI(
 )
 
 def ask_model(input):
-  response = ""
   result = client.chat.completions.create(
     # the model used for the completion, make sure to use the correct version associated with the API key
     model="deepseek/deepseek-r1:free",
@@ -19,11 +18,9 @@ def ask_model(input):
     ]
   )
   try:
-    response = result.choices[0].message.content
+    return result.choices[0].message.content
   except Exception as e:
-    print(e)
-    return "Something went wrong. Please try again."
-  return response
+    return f"Something went wrong. Please try again: {e}"
 
 def main():
   print("Welcome to Simple Prompt! Type 'exit' to quit.")
