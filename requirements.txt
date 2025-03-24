@@ -4,3 +4,4 @@ notebook
 scikit-learn
 faiss-cpu
 sentence-transformers
+dotenv
