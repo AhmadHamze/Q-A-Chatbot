@@ -18,9 +18,8 @@ def medical_chatbot(user_query, chat_history=[]):
 
     {retrieved_info}
 
-    Now answer the following question in a helpful and concise manner:
-    Patient: {user_query}
-    Doctor:
+    Now, answer the following question solely based on the context provided above, do not use any other knowledge, even if it is related:
+    {user_query}
     """
     response = client_4o.chat.completions.create(
         model=GPT_4o_MODEL,
