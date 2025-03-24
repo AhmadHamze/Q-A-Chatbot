@@ -1,14 +1,18 @@
 import requests
 from openai import OpenAI
-from project_secrets import GPT_4o_API_KEY
+import os
+from dotenv import load_dotenv
+
 
 # * This is a simple trivia quiz game that uses the Open Trivia Database API to get random trivia questions.
 # * GPT-4o is used to ask the user a random trivia question using the model's tools to get the question from the Open Trivia Database.
 
+load_dotenv(".env")
+
 GPT_4o_MODEL = "openai/gpt-4o-mini"
 
 TRIVIA_URL = "https://opentdb.com/api.php?amount=1&category=9&difficulty=medium&type=boolean"
-client_4o = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=GPT_4o_API_KEY)
+client_4o = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["GPT_4o_API_KEY"])
 
 tools = [{
     "type": "function",
