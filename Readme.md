@@ -21,8 +21,24 @@ Install the required packages:
 pip install -r requirements.txt
 ```
 
-After the installation is complete, create a file named `project_secret.py`, inside it you have to store your API key like this:
+After the installation is complete, create a file named `.env`, inside it you have to store your API key like this:
 
 ```python
-API_KEY = "YOUR_API_KEY"
+GPT_4o_API_KEY="YOUR_API_KEY"
+```
+
+> It is important that you check the naming of the API key with what is in the code. The code won't work if the name is different.
+
+### Running the code
+
+To run the code, you can use the following command from root directory:
+
+```bash
+python3.12 -m src.chatbot.medical_chatbot
+```
+
+Once the gradio server is ready, you can access the chatbot interface by opening the following link in your browser:
+
+```
+localhost:7860
 ```
