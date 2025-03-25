@@ -1,5 +1,4 @@
 /env
-project_secrets.py
 __pycache__
 /.ipynb_checkpoints
 *.npy

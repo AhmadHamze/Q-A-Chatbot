@@ -27,9 +27,17 @@ After the installation is complete, create a file named `.env`, inside it you ha
 GPT_4o_API_KEY="YOUR_API_KEY"
 ```
 
-> It is important that you check the naming of the API key with what is in the code. The code won't work if the name is different.
+> It is important that you check the naming of the API key with what is in the code. The code won't work if the name is different. 
 
-### Running the code
+## Chatbot
+
+## Obtaining the embeddings file
+
+In order to run the chatbot, you need to have the file `question_embeddings_gpu.npy` in the `data` directory. This file contains the embeddings of the questions in the dataset.
+
+Check `notebooks/chatbot_generate_embeddings.ipynb` to generate this file.
+
+## Running the Chatbot
 
 To run the code, you can use the following command from root directory:
 
