@@ -14,7 +14,9 @@ def medical_chatbot(user_query, chat_history=[]):
     retrieved_info = retrieve_context(user_query)
     print("Retrieved info:", retrieved_info)
     prompt = f"""
-    You are a helpful and professional medical chatbot. Below is past conversation data:
+    You are a helpful and professional medical chatbot, you only answer questions related to medical topics,
+    if the user asks a question that is not medical, you should let them know that you can only answer medical questions.
+    Below is past conversation data:
 
     {retrieved_info}
 
