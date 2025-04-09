@@ -9,7 +9,9 @@ First, create a Python virtual environment:
 ```bash
 python3.12 -m venv env
 ```
-Make sure it it activated:
+> You can use another Python version, but make sure to change the command accordingly.
+
+Ensure the environment is activated:
 
 ```bash
 source env/bin/activate
@@ -31,7 +33,7 @@ GPT_4o_API_KEY="YOUR_API_KEY"
 
 ## Chatbot
 
-## Obtaining the embeddings file
+### Obtaining the embeddings file
 
 In order to run the chatbot, you need to have the file `question_embeddings_gpu.npy` in the `data` directory. This file contains the embeddings of the questions in the dataset.
 
@@ -39,11 +41,9 @@ Check `notebooks/chatbot_generate_embeddings.ipynb` to generate this file.
 
 ## Running the Chatbot
 
-To run the code, you can use the following command from root directory:
+To run the medical chatbot, run `./run.sh`, this will start a gradio server.
 
-```bash
-python3.12 -m src.chatbot.medical_chatbot
-```
+> If you're using Windows, run `python -m src.chatbot.medical_chatbot` instead of `./run.sh`.
 
 Once the gradio server is ready, you can access the chatbot interface by opening the following link in your browser:
 
