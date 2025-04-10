@@ -37,5 +37,6 @@ def medical_chatbot(user_query, chat_history=[]):
     )
     return response.choices[0].message.content
 
-demo = gr.ChatInterface(fn=medical_chatbot, title="Medical Chatbot", description="Ask any medical question.", type="messages")
-demo.launch()
+if __name__ == "__main__":
+    demo = gr.ChatInterface(fn=medical_chatbot, title="Medical Chatbot", description="Ask any medical question.", type="messages")
+    demo.launch()
