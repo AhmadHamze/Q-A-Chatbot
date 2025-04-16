@@ -8,3 +8,8 @@ dotenv
 gradio
 fastapi
 uvicorn
+# langchain[openai]
+# langchain-community
+# langchain-core
+# langchain_huggingface
+# docling

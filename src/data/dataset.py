@@ -9,6 +9,10 @@ EMBEDDINGS_PATH = os.path.join(BASE_DIR, "question_embeddings_gpu.npy")
 
 ds = load_dataset("ruslanmv/ai-medical-chatbot")
 
+# TODO: use another dataset alongside this one
+# Login using e.g. `huggingface-cli login` to access this dataset
+# ds = load_dataset("FreedomIntelligence/medical-o1-reasoning-SFT", "en")
+
 qa_pairs = [(entry["Patient"], entry["Doctor"]) for entry in ds["train"]]
 questions, answers = zip(*qa_pairs)
 

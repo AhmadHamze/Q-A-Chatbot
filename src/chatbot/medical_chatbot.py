@@ -9,6 +9,8 @@ load_dotenv("../../.env")
 GPT_4o_MODEL = "openai/gpt-4o-mini"
 client_4o = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["GPT_4o_API_KEY"])
 
+# TODO: Use chat_history
+# TODO: Show the user the retrieved context
 def medical_chatbot(user_query, chat_history=[]):
     """Uses OpenAI's GPT-4 to generate a response with retrieved context"""
     retrieved_info = retrieve_context(user_query)
