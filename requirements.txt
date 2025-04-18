@@ -8,3 +8,9 @@ dotenv
 gradio
 fastapi
 uvicorn
+qdrant-client
+# langchain[openai]
+# langchain-community
+# langchain-core
+# langchain_huggingface
+# docling

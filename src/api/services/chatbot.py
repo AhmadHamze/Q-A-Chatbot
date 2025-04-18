@@ -1,4 +1,4 @@
-from src.chatbot.medical_chatbot import medical_chatbot
+from src.api.qdrant_chatbot import medical_chatbot
 
 def get_chatbot_response(query: str, chat_history=None):
     """
