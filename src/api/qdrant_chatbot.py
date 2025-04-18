@@ -36,8 +36,7 @@ def retrieve_context(query: str) -> str:
 def medical_chatbot(user_query, chat_history=[]):
     """Uses OpenAI's GPT-4 to generate a response with retrieved context"""
     retrieved_info = retrieve_context(user_query)
-    print("Qdrant chatbot")
-    # print("Retrieved info:", retrieved_info)
+    print("Retrieved info:", retrieved_info)
     prompt = f"""
     You are a helpful and professional medical chatbot, you only answer questions related to medical topics,
     if the user asks a question that is not medical, you should let them know that you can only answer medical questions.
