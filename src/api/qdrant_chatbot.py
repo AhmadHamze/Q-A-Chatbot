@@ -21,11 +21,18 @@ client = QdrantClient(
 embed_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 def retrieve_context(query: str) -> str:
+    # Input validation
+    if not isinstance(query, str):
+        raise TypeError("Query must be a string")
+    if not query.strip() or len(query) > 2000:
+        raise ValueError("Query must be non-empty and reasonably sized")
     nearest = client.query_points(
         collection_name=COLLECTION_NAME,
         query=embed_model.encode(query),
         limit=3
     )
+    if not nearest.points:
+        return "No relevant information found."
     return "\n\n".join(
         [
             f"Patient: {question}\nDoctor: {answer}" for question, answer in [(point.payload["question"], point.payload["answer"]) for point in nearest.points]
