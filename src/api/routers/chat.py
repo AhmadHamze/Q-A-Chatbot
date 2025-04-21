@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from ..models import ChatRequest, ChatResponse
-from ..services.chatbot import get_chatbot_response
+from models import ChatRequest, ChatResponse
+from services.chatbot import get_chatbot_response
 
 router = APIRouter(
     prefix="/chat",
