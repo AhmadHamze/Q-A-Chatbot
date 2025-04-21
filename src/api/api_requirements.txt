@@ -1,0 +1,7 @@
+openai
+sentence-transformers
+dotenv
+fastapi
+uvicorn
+qdrant-client
+boto3
