@@ -1,0 +1,7 @@
+openai
+requests
+dotenv
+fastapi
+uvicorn
+qdrant-client
+boto3

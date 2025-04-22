@@ -1,24 +1,54 @@
-import os
+import requests
 from openai import OpenAI
-from dotenv import load_dotenv
+import json
+import boto3
 from qdrant_client import QdrantClient
-from sentence_transformers import SentenceTransformer
 
-load_dotenv("../../.env")
+def get_secret(secret_name, region_name="eu-north-1"):
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name="secretsmanager",
+        region_name=region_name
+    )
+    try:
+        response = client.get_secret_value(SecretId=secret_name)
+        if "SecretString" in response:
+            return json.loads(response["SecretString"])
+        else:
+            # Binary secrets handling if needed
+            return json.loads(response["SecretBinary"].decode("utf-8"))
+    except Exception as e:
+        print(f"Error retrieving secret {secret_name}: {e}")
+        raise
+
+API_URL = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
+def get_embedding(text: str):
+    response = requests.post(
+        API_URL,
+        headers=headers,
+        json={"inputs": text}
+    )
+    return response.json()
+
+# Get secrets from AWS Secrets Manager
+# You can store all related secrets in one secret with multiple key-value pairs
+secrets = get_secret("qdrant-medical-chatbot-secrets")
 
 GPT_4o_MODEL = "openai/gpt-4o-mini"
-client_4o = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["GPT_4o_API_KEY"])
+client_4o = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=secrets["GPT_4o_API_KEY"])
 
-QDRANT_HOST = os.environ["QDRANT_HOST"]
-QDRANT_API_KEY = os.environ["QDRANT_API_KEY"]
-COLLECTION_NAME = os.environ["COLLECTION_NAME"]
+QDRANT_HOST = secrets["QDRANT_HOST"]
+QDRANT_API_KEY = secrets["QDRANT_API_KEY"]
+HUGGING_FACE_API_KEY = secrets["HUGGING_FACE_API_KEY"]
+COLLECTION_NAME="ruslanmv-ai-medical-chatbot"
 
 client = QdrantClient(
     url=QDRANT_HOST,
     api_key=QDRANT_API_KEY,
 )
 
-embed_model = SentenceTransformer("all-MiniLM-L6-v2")
+headers = {"Authorization": f"Bearer {HUGGING_FACE_API_KEY}"}
 
 def retrieve_context(query: str) -> str:
     # Input validation
@@ -28,7 +58,7 @@ def retrieve_context(query: str) -> str:
         raise ValueError("Query must be non-empty and reasonably sized")
     nearest = client.query_points(
         collection_name=COLLECTION_NAME,
-        query=embed_model.encode(query),
+        query=get_embedding(query),
         limit=3
     )
     if not nearest.points:

@@ -6,9 +6,6 @@ faiss-cpu
 sentence-transformers
 dotenv
 gradio
-fastapi
-uvicorn
-qdrant-client
 # langchain[openai]
 # langchain-community
 # langchain-core
