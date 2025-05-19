@@ -22,7 +22,7 @@ def get_secret(secret_name, region_name="eu-north-1"):
         print(f"Error retrieving secret {secret_name}: {e}")
         raise
 
-API_URL = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
+API_URL = "https://router.huggingface.co/hf-inference/models/sentence-transformers/all-MiniLM-L6-v2/pipeline/feature-extraction"
 def get_embedding(text: str):
     response = requests.post(
         API_URL,
