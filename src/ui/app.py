@@ -2,7 +2,7 @@ import gradio as gr
 import requests
 
 # Replace with your actual API endpoint
-API_URL = "http://localhost:8000/chat"
+API_URL = "http://chatbot-api:8000/chat"
 
 def chat_with_api(query):
     try:

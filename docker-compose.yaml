@@ -17,4 +17,26 @@ services:
       - AWS_REGION=${AWS_REGION}
     volumes:
       - ./src/api:/app
+    networks:
+      - backend
     restart: unless-stopped
+
+  chatbot-ui:
+    build:
+      context: .
+      dockerfile: src/ui/Dockerfile
+    ports:
+      - "7860:7860"
+    environment:
+      - PORT=7860
+    networks:
+      - backend
+    depends_on:
+      - chatbot-api
+    volumes:
+      - ./src/ui:/app
+    restart: unless-stopped
+
+networks:
+  backend:
+    driver: bridge
