@@ -29,6 +29,7 @@ services:
       - "7860:7860"
     environment:
       - PORT=7860
+      - API_URL=http://chatbot-api:8000/chat
     networks:
       - backend
     depends_on:
