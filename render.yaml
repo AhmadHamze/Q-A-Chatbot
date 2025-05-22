@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: gradio-ui
+    env: python
+    plan: free
+    buildCommand: pip install -r src/ui/ui_requirements.txt
+    startCommand: python src/ui/app.py
+    envVars:
+      - key: CHATBOT_API_URL
+        value: ${CHATBOT_API_URL}
