@@ -1,27 +1,8 @@
+import os
 import requests
 from openai import OpenAI
-import json
-import boto3
 from qdrant_client import QdrantClient
 from utils import translate_function_call
-
-def get_secret(secret_name, region_name="eu-north-1"):
-    # Create a Secrets Manager client
-    session = boto3.session.Session()
-    client = session.client(
-        service_name="secretsmanager",
-        region_name=region_name
-    )
-    try:
-        response = client.get_secret_value(SecretId=secret_name)
-        if "SecretString" in response:
-            return json.loads(response["SecretString"])
-        else:
-            # Binary secrets handling if needed
-            return json.loads(response["SecretBinary"].decode("utf-8"))
-    except Exception as e:
-        print(f"Error retrieving secret {secret_name}: {e}")
-        raise
 
 API_URL = "https://router.huggingface.co/hf-inference/models/sentence-transformers/all-MiniLM-L6-v2/pipeline/feature-extraction"
 def get_embedding(text: str):
@@ -34,15 +15,14 @@ def get_embedding(text: str):
 
 # Get secrets from AWS Secrets Manager
 # You can store all related secrets in one secret with multiple key-value pairs
-secrets = get_secret("qdrant-medical-chatbot-secrets")
 
 GPT_4o_MODEL = "openai/gpt-4o-mini"
-client_4o = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=secrets["GPT_4o_API_KEY"])
+client_4o = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.getenv("GPT_4o_API_KEY"))
 
-QDRANT_HOST = secrets["QDRANT_HOST"]
-QDRANT_API_KEY = secrets["QDRANT_API_KEY"]
-HUGGING_FACE_API_KEY = secrets["HUGGING_FACE_API_KEY"]
-COLLECTION_NAME="ruslanmv-ai-medical-chatbot"
+QDRANT_HOST = os.getenv("QDRANT_HOST")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+HUGGING_FACE_API_KEY = os.getenv("HUGGING_FACE_API_KEY")
+COLLECTION_NAME = "ruslanmv-ai-medical-chatbot"
 
 client = QdrantClient(
     url=QDRANT_HOST,
