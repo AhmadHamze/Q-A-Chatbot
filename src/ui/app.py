@@ -2,7 +2,7 @@ import gradio as gr
 import requests
 import os
 
-API_URL = os.environ.get("CHATBOT_API_URL", "http://localhost:8000/chat/")
+API_URL = os.environ.get("CHATBOT_API_URL_RENDER", "http://localhost:8000/chat/")
 
 def chat_with_api(query):
     try:
@@ -14,10 +14,10 @@ def chat_with_api(query):
 
 iface = gr.Interface(
     fn=chat_with_api,
-    inputs=gr.Textbox(label="Ваш вопрос"),
-    outputs=gr.Textbox(label="Ответ бота"),
-    title="Медицинский чат-бот",
-    description="Введите ваш вопрос"
+    inputs=gr.Textbox(label="Your Question"),
+    outputs=gr.Textbox(label="Bot's Answer"),
+    title="Medical Chatbot",
+    description="Enter your question"
 )
 
 if __name__ == "__main__":
